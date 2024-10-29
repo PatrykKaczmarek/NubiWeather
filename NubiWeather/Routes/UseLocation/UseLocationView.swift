@@ -1,5 +1,5 @@
 //
-//  WelcomeView.swift
+//  UseLocationView.swift
 //  NubiWeather
 //
 //  Created by Patryk on 29/10/2024.
@@ -7,31 +7,31 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
-
-    @StateObject var coordinator: WelcomeCoordinator
+struct UseLocationView: View {
+    
+    @StateObject var coordinator: UseLocationCoordinator
     
     var body: some View {
         VStack(spacing: 16) {
-            Text("Welcome to the weather app!")
+            Text("Grant location authorisations")
                 .titleStyle()
             
-            Text("To be able to start, we need a location for which the weather information can be retrieved.")
+            Text("To be able to access your location, the app requires authorisation to do so.\nYour phone must also support this.")
                 .bodyStyle()
                 .frame(alignment: .leading)
                 .padding([.top, .bottom])
             
             Button {
-                coordinator.enterLocation()
+                // setup coordinator here
             } label: {
-                Text("Enter location")
+                Text("Check again")
             }
             .buttonStyle(OutlineButtonStyle())
             
             Button {
-                coordinator.useLocation()
+                coordinator.confirmLocation()
             } label: {
-                Text("Use my location")
+                Text("Done")
             }
             .buttonStyle(SolidButtonStyle())
             
