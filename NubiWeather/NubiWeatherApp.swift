@@ -46,7 +46,7 @@ private extension NubiWeatherApp {
         case .weatherForecast:
             WeatherForecastView(coordinator: WeatherForecastCoordinator(navigation: self))
         case .weatherDetails:
-            EmptyView()
+            WeatherDetailsView(coordinator: WeatherForecastCoordinator(navigation: self))
         }
     }
 }
