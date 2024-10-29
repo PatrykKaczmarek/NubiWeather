@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct NubiWeatherApp: App {
+    
+    @State var location = String()
+    
     var body: some Scene {
         WindowGroup {
-            WelcomeView(onEnterLocation: {}, onUseLocation: {})
+            EnterLocationView(location: location, confirmation: {})
         }
     }
 }

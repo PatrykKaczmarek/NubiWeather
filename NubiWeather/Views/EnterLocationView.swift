@@ -1,5 +1,5 @@
 //
-//  WelcomeView.swift
+//  EnterLocationView.swift
 //  NubiWeather
 //
 //  Created by Patryk on 29/10/2024.
@@ -7,34 +7,32 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct EnterLocationView: View {
     
-    var onEnterLocation: () -> Void
-    var onUseLocation: () -> Void
+    @State var location: String
+    
+    var confirmation: () -> Void
     
     var body: some View {
         VStack(spacing: 16) {
-            Text("Welcome to the weather app!")
+            Text("Search your location")
                 .titleStyle()
             
-            Text("To be able to start, we need a location for which the weather information can be retrieved.")
+            Text("Search for your location in the following text field and then select it from the list.")
                 .bodyStyle()
                 .frame(alignment: .leading)
                 .padding([.top, .bottom])
             
-            Button {
-                onEnterLocation()
-            } label: {
-                Text("Enter location")
-            }
-            .buttonStyle(OutlineButtonStyle())
+            SearchField(text: $location, placeholder: "Location")
+                .padding(.bottom)
             
             Button {
-                onUseLocation()
+                confirmation()
             } label: {
-                Text("Use my location")
+                Text("Done")
             }
             .buttonStyle(SolidButtonStyle())
+            .disabled(location.isEmpty)
             
             Spacer()
         }
@@ -45,5 +43,6 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    WelcomeView(onEnterLocation: {}, onUseLocation: {})
+    @Previewable @State var location = String()
+    EnterLocationView(location: location, confirmation: {})
 }
