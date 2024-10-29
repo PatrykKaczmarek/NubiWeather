@@ -43,10 +43,16 @@ private extension NubiWeatherApp {
         case .useMyLocation:
             UseLocationView(coordinator: UseLocationCoordinator(navigation: self))
                 .navigationTitle("Use my location")
-        case .weatherForecast:
-            WeatherForecastView(coordinator: WeatherForecastCoordinator(navigation: self))
-        case .weatherDetails:
-            WeatherDetailsView(coordinator: WeatherForecastCoordinator(navigation: self))
+        case let .weatherForecast(location):
+            WeatherForecastView(
+                coordinator: WeatherForecastCoordinator(navigation: self),
+                location: location
+            )
+        case let .weatherDetails(weather):
+            WeatherDetailsView(
+                coordinator: WeatherForecastCoordinator(navigation: self),
+                weather: weather
+            )
         }
     }
 }

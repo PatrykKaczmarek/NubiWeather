@@ -16,6 +16,7 @@ final class UseLocationCoordinator: ObservableObject {
     }
     
     func confirmLocation() {
-        navigation.push(.weatherForecast)
+        let location = Location(latitude: 52.409538, longitude: 16.931992)
+        navigation.push(.weatherForecast(location))
     }
 }

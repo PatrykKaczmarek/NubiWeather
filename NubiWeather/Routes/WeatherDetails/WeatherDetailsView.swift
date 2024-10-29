@@ -11,6 +11,8 @@ struct WeatherDetailsView: View {
     
     @StateObject var coordinator: WeatherForecastCoordinator
     
+    let weather: Weather
+    
     var body: some View {
         VStack(spacing: 16) {
             Text("Weather Details")

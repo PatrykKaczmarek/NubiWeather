@@ -11,10 +11,15 @@ struct WeatherForecastView: View {
     
     @StateObject var coordinator: WeatherForecastCoordinator
     
+    let location: Location
+    
     var body: some View {
         VStack(spacing: 16) {
             Text("Weather forecast")
                 .titleStyle()
+            
+            Text("lat: \(location.latitude), long: \(location.longitude)")
+                .bodyStyle()
             
             Button {
                 coordinator.showForecastDetails()

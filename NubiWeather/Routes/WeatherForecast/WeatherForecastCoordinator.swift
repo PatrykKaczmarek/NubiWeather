@@ -16,6 +16,7 @@ final class WeatherForecastCoordinator: ObservableObject {
     }
     
     func showForecastDetails() {
-        navigation.push(.weatherDetails)
+        let weather = Weather(date: Date(), temperature: 23)
+        navigation.push(.weatherDetails(weather))
     }
 }
