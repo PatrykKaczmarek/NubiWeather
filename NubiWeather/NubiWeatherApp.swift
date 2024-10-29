@@ -44,7 +44,7 @@ private extension NubiWeatherApp {
             UseLocationView(coordinator: UseLocationCoordinator(navigation: self))
                 .navigationTitle("Use my location")
         case .weatherForecast:
-            EmptyView()
+            WeatherForecastView(coordinator: WeatherForecastCoordinator(navigation: self))
         case .weatherDetails:
             EmptyView()
         }
