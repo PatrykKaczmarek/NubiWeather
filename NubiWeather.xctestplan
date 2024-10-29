@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "96CCADAE-14F8-4D34-B67C-C7D43176A540",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:NubiWeather.xcodeproj",
+      "identifier" : "5E7E3D752CD14E1200527D44",
+      "name" : "NubiWeather"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:NubiWeather.xcodeproj",
+        "identifier" : "5E7E3D862CD14E1400527D44",
+        "name" : "NubiWeatherTests"
+      }
+    }
+  ],
+  "version" : 1
+}
