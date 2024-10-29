@@ -9,9 +9,7 @@ import SwiftUI
 
 struct EnterLocationView: View {
     
-    @State var location: String
-    
-    var confirmation: () -> Void
+    @StateObject var coordinator: EnterLocationCoordinator
     
     var body: some View {
         VStack(spacing: 16) {
@@ -23,16 +21,16 @@ struct EnterLocationView: View {
                 .frame(alignment: .leading)
                 .padding([.top, .bottom])
             
-            SearchField(text: $location, placeholder: "Location")
+            SearchField(text: $coordinator.location, placeholder: "Location")
                 .padding(.bottom)
             
             Button {
-                confirmation()
+                coordinator.confirmLocation()
             } label: {
                 Text("Done")
             }
             .buttonStyle(SolidButtonStyle())
-            .disabled(location.isEmpty)
+            .disabled(coordinator.location.isEmpty)
             
             Spacer()
         }
@@ -40,9 +38,4 @@ struct EnterLocationView: View {
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.nubiBlack)
     }
-}
-
-#Preview {
-    @Previewable @State var location = String()
-    EnterLocationView(location: location, confirmation: {})
 }

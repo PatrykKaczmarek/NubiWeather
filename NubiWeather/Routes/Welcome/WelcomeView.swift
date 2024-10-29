@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    
-    var onEnterLocation: () -> Void
-    var onUseLocation: () -> Void
+
+    @StateObject var coordinator: WelcomeCoordinator
     
     var body: some View {
         VStack(spacing: 16) {
@@ -23,14 +22,14 @@ struct WelcomeView: View {
                 .padding([.top, .bottom])
             
             Button {
-                onEnterLocation()
+                coordinator.enterLocation()
             } label: {
                 Text("Enter location")
             }
             .buttonStyle(OutlineButtonStyle())
             
             Button {
-                onUseLocation()
+                coordinator.useLocation()
             } label: {
                 Text("Use my location")
             }
@@ -44,6 +43,6 @@ struct WelcomeView: View {
     }
 }
 
-#Preview {
-    WelcomeView(onEnterLocation: {}, onUseLocation: {})
-}
+//#Preview {
+//    WelcomeView(coordinator: WelcomeCoordinator)
+//}
