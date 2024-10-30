@@ -24,7 +24,11 @@ final class EnterLocationCoordinator: ObservableObject {
             guard let cityCoordinates = try await locationService.getLocation(from: location) else {
                 return
             }
-            let location = Location(latitude: cityCoordinates.latitude, longitude: cityCoordinates.longitude)
+            let location = Location(
+                latitude: cityCoordinates.latitude,
+                longitude: cityCoordinates.longitude,
+                autoLocated: false
+            )
             navigation.push(.weatherForecast(location))
         }
     }

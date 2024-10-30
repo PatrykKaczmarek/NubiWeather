@@ -26,22 +26,6 @@ struct WeatherForecastRow: View {
     }
 }
 
-fileprivate extension Weather {
-    var displayDate: String {
-        DateFormatters.simpleDateFormatter.string(from: date)
-    }
-    
-    var dayName: String {
-        if Calendar.current.isDateInToday(date) {
-            return "Today"
-        } else if Calendar.current.isDateInTomorrow(date) {
-            return "Tomorrow"
-        } else {
-            return DateFormatters.dayDateFormatter.string(from: date)
-        }
-    }
-}
-
 #Preview {
     WeatherForecastRow(
         weather: .init(
@@ -51,12 +35,12 @@ fileprivate extension Weather {
             condition: "Cloudy all day",
             humidityAvg: 0,
             precipitationProbabilityAvg: 0,
-            uvIndexAvg: 0,
+            uvIndexMin: 0,
             windSpeedMax: 0,
             visibilityAvg: 0,
             pressureSurfaceLevelAvg: 0,
-            sunsetTime: .distantFuture,
-            sunriseTime: .distantPast
+            sunsetDate: .distantFuture,
+            sunriseDate: .distantPast
         )
     )
 }

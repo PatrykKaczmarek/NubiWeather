@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct TitleViewModifier: ViewModifier {
+    
+    let fontWeight: Font.Weight
+    
     func body(content: Content) -> some View {
         content
             .font(.title2)
             .foregroundStyle(.nubiWhite)
+            .fontWeight(fontWeight)
     }
 }
 
 extension View {
-    func titleStyle() -> some View {
-        modifier(TitleViewModifier())
+    func titleStyle(fontWeight: Font.Weight = .regular) -> some View {
+        modifier(TitleViewModifier(fontWeight: fontWeight))
     }
 }

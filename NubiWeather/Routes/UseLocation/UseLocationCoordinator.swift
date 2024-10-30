@@ -26,7 +26,11 @@ final class UseLocationCoordinator: ObservableObject {
     
     func confirmLocation() {
         guard let currentCoreLocation = locationService.fetchLocation() else { return }
-        let location = Location(latitude: currentCoreLocation.latitude, longitude: currentCoreLocation.longitude)
+        let location = Location(
+            latitude: currentCoreLocation.latitude,
+            longitude: currentCoreLocation.longitude,
+            autoLocated: true
+        )
         navigation.push(.weatherForecast(location))
     }
     

@@ -19,4 +19,10 @@ struct DateFormatters {
         formatter.dateFormat = "EEEE"
         return formatter
     }()
+    
+    static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm a"
+        return formatter
+    }()
 }

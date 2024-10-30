@@ -48,7 +48,7 @@ final class LocationService: NSObject, ObservableObject {
         let geocoder = CLGeocoder()
         guard let placemark = try await geocoder.geocodeAddressString(cityName).first else { return nil }
         guard let coordinates = placemark.location?.coordinate else { return nil }
-        return Location(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        return Location(latitude: coordinates.latitude, longitude: coordinates.longitude, autoLocated: true)
     }
     
     func requestAuthorization() {

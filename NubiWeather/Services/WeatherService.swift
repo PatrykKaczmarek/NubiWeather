@@ -63,12 +63,12 @@ final class WeatherService {
                         }(),
                         humidityAvg: values.humidityAvg,
                         precipitationProbabilityAvg: values.precipitationProbabilityAvg,
-                        uvIndexAvg: values.uvIndexAvg.flatMap { Int(truncating: $0) },
+                        uvIndexMin: values.uvIndexMin.flatMap { Int(truncating: $0) },
                         windSpeedMax: values.windSpeedMax,
                         visibilityAvg: values.visibilityAvg,
                         pressureSurfaceLevelAvg: values.pressureSurfaceLevelAvg,
-                        sunsetTime: values.sunsetTime.flatMap { Date(instant: $0) },
-                        sunriseTime: values.sunriseTime.flatMap { Date(instant: $0) }
+                        sunsetDate: values.sunsetTime.flatMap { Date(instant: $0) },
+                        sunriseDate: values.sunriseTime.flatMap { Date(instant: $0) }
                     )
                 )
             }

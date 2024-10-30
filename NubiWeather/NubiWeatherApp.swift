@@ -88,4 +88,11 @@ extension NubiWeatherApp: Navigation {
     func pop() {
         path.removeLast(1)
     }
+    
+    func route(to element: NavigationDestination) {
+        guard let index = path.lastIndex(of: element) else {
+            return
+        }
+        path.removeLast(index + 1)
+    }
 }

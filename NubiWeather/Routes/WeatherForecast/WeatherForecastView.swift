@@ -56,7 +56,16 @@ private extension WeatherForecastView {
             
             Group {
                 if let currentCity = coordinator.currentCityName {
-                    Text(currentCity)
+                    if coordinator.isAutoLocated {
+                        Text(currentCity)
+                    } else {
+                        Button {
+                            coordinator.changeLocation()
+                        } label: {
+                            Text(currentCity)
+                        }
+                    }
+                    
                 } else {
                     Text("Unknown")
                 }

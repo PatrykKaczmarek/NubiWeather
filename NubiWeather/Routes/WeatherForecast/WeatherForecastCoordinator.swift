@@ -16,6 +16,10 @@ final class WeatherForecastCoordinator: ObservableObject {
     private let locationService: LocationService
     private let location: Location
     
+    var isAutoLocated: Bool {
+        location.autoLocated
+    }
+    
     init(
         navigation: Navigation,
         locationService: LocationService,
@@ -34,6 +38,10 @@ final class WeatherForecastCoordinator: ObservableObject {
     
     func showForecastDetails(weather: Weather) {
         navigation.push(.weatherDetails(weather))
+    }
+    
+    func changeLocation() {
+        navigation.route(to: .enterLocationManually)
     }
     
     func fetchWeather() {

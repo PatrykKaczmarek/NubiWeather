@@ -8,4 +8,5 @@
 protocol Navigation {
     func push(_ element: NavigationDestination)
     func pop()
+    func route(to element: NavigationDestination)
 }
