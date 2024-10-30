@@ -38,8 +38,7 @@ final class WeatherForecastCoordinator: ObservableObject {
         navigation.push(.weatherDetails(weather))
     }
     
-    func fetchWeather(location: Location) {
-        
+    func fetchWeather() {
         //service.fetchWeather(location: location)
     }
 }

@@ -17,6 +17,20 @@ struct WeatherForecastView: View {
             
             topLocationView
             
+            List(coordinator.weather) { weather in
+                WeatherForecastRow(weather: weather)
+                    .onTapGesture {
+                        coordinator.showForecastDetails(weather: weather)
+                    }
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowBackground(Color.clear)
+                    .alignmentGuide(
+                    .listRowSeparatorLeading) { dimension in 0 }
+                    
+            }
+            .listStyle(.inset)
+            .scrollContentBackground(.hidden)
+            
             Button {
 //                /// Weather comes from list index
 //                coordinator.showForecastDetails(weather: <#T##Weather#>)
@@ -31,7 +45,7 @@ struct WeatherForecastView: View {
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.nubiBlack)
         .onAppear {
-//            coordinator.fetchWeather(location: location)
+            coordinator.fetchWeather()
         }
     }
 }
@@ -44,11 +58,19 @@ fileprivate extension WeatherForecastView {
             
             Spacer()
             
-            if let currentCity = coordinator.currentCityName {
-                Text(currentCity)
-            } else {
-                Text("Unknown")
+            Group {
+                if let currentCity = coordinator.currentCityName {
+                    Text(currentCity)
+                } else {
+                    Text("Unknown")
+                }
             }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.nubiWhite, lineWidth: 0.4)
+            )
         }
         .bodyStyle()
     }

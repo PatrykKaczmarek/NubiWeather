@@ -56,7 +56,10 @@ struct Location: Hashable {
     let longitude: Double
 }
 
-struct Weather: Hashable {
+struct Weather: Hashable, Identifiable {
+    var id: Date {
+        date
+    }
     let date: Date
     let temperatureMax: Double
     let temperatureMin: Double
