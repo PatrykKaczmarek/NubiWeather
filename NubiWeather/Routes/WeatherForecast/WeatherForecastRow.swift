@@ -32,7 +32,13 @@ fileprivate extension Weather {
     }
     
     var dayName: String {
-        DateFormatters.dayDateFormatter.string(from: date)
+        if Calendar.current.isDateInToday(date) {
+            return "Today"
+        } else if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow"
+        } else {
+            return DateFormatters.dayDateFormatter.string(from: date)
+        }
     }
 }
 
