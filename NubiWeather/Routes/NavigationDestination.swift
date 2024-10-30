@@ -58,5 +58,15 @@ struct Location: Hashable {
 
 struct Weather: Hashable {
     let date: Date
-    let temperature: Int
+    let temperatureMax: Double
+    let temperatureMin: Double
+    /// let description: String = "mostly sunny"
+    let humidityAvg: Double
+    let precipitationProbabilityAvg: Double
+    let uvIndexAvg: Double
+    let windSpeedMax: Double
+    let visibilityAvg: Double
+    let pressureSurfaceLevelAvg: Double
+    let sunsetTime: Date
+    let sunriseTime: Date
 }

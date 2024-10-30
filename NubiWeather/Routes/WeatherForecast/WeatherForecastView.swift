@@ -22,7 +22,8 @@ struct WeatherForecastView: View {
                 .bodyStyle()
             
             Button {
-                coordinator.showForecastDetails()
+//                /// Weather comes from list index
+//                coordinator.showForecastDetails(weather: <#T##Weather#>)
             } label: {
                 Text("Today")
             }
@@ -33,5 +34,8 @@ struct WeatherForecastView: View {
         .padding(EdgeInsets(top: 64, leading: 16, bottom: 16, trailing: 16))
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.nubiBlack)
+        .onAppear {
+            coordinator.fetchWeather(location: location)
+        }
     }
 }
