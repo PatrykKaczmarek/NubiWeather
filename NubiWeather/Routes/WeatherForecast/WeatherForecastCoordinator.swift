@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Combine
-import CoreLocation
 
 final class WeatherForecastCoordinator: ObservableObject {    
     @Published var currentCityName: String?
