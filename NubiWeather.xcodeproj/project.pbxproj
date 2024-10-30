@@ -358,6 +358,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NubiWeather/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -396,6 +399,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NubiWeather/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

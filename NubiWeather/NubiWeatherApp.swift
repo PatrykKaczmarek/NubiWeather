@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct NubiWeatherApp: App {
+    private let locationService = LocationService()
     
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(resource: .nubiWhite)]
@@ -43,6 +44,7 @@ private extension NubiWeatherApp {
         case .useMyLocation:
             UseLocationView(coordinator: UseLocationCoordinator(navigation: self))
                 .navigationTitle("Use my location")
+                .environmentObject(locationService)
         case let .weatherForecast(location):
             WeatherForecastView(
                 coordinator: WeatherForecastCoordinator(navigation: self),

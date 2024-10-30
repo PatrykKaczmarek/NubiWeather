@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UseLocationView: View {
+    @EnvironmentObject var locationService: LocationService
     
     @StateObject var coordinator: UseLocationCoordinator
     
@@ -21,8 +22,10 @@ struct UseLocationView: View {
                 .frame(alignment: .leading)
                 .padding([.top, .bottom])
             
+            statusView
+            
             Button {
-                // setup coordinator here
+                locationService.requestAuthorization()
             } label: {
                 Text("Check again")
             }
@@ -40,5 +43,48 @@ struct UseLocationView: View {
         .padding(EdgeInsets(top: 64, leading: 16, bottom: 16, trailing: 16))
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.nubiBlack)
+        .task {
+            locationService.verifyServices()
+        }
+    }
+}
+
+fileprivate extension UseLocationView {
+    @ViewBuilder
+    var statusView: some View{
+        VStack {
+            permissionEntry("Location service", isOn: locationService.isLocationServiceEnabled, negativeText: "Disabled")
+            permissionEntry("Location permission", isOn: locationService.isLocationPermissionGranted)
+        }
+    }
+    
+    @ViewBuilder
+    func permissionEntry(
+        _ title: String,
+        isOn: Bool,
+        affirmativeImageName: String = "checkmark",
+        negativeImageName: String = "xmark",
+        affirmativeText: String = "OK",
+        negativeText: String = "Not granted"
+    ) -> some View {
+        HStack {
+            Text(title)
+            
+            Spacer()
+            
+            HStack(spacing: 8) {
+                Image(systemName: isOn ? affirmativeImageName : negativeImageName)
+                    .scaledToFit()
+                    .tint(.nubiPink)
+                Text(isOn ? affirmativeText : negativeText)
+            }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.nubiGray)
+            )
+        }
+        .bodyStyle()
     }
 }
