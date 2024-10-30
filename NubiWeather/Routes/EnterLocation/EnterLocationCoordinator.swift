@@ -11,14 +11,21 @@ final class EnterLocationCoordinator: ObservableObject {
     
     @Published var location = String()
     
+    private let locationService: LocationService
     private let navigation: Navigation
     
-    init(navigation: Navigation) {
+    init(navigation: Navigation, locationService: LocationService) {
         self.navigation = navigation
+        self.locationService = locationService
     }
     
     func confirmLocation() {
-        let location = Location(latitude: 52.409538, longitude: 16.931992)
-        navigation.push(.weatherForecast(location))
+        Task { @MainActor in
+            guard let cityCoordinates = try await locationService.getLocation(from: location) else {
+                return
+            }
+            let location = Location(latitude: cityCoordinates.latitude, longitude: cityCoordinates.longitude)
+            navigation.push(.weatherForecast(location))
+        }
     }
 }

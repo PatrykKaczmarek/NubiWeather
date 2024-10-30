@@ -40,7 +40,12 @@ private extension NubiWeatherApp {
     func view(for destination: NavigationDestination) -> some View {
         switch destination {
         case .enterLocationManually:
-            EnterLocationView(coordinator: EnterLocationCoordinator(navigation: self))
+            EnterLocationView(
+                coordinator: EnterLocationCoordinator(
+                    navigation: self,
+                    locationService: services.locationService
+                )
+            )
                 .navigationTitle("Enter Location")
         case .useMyLocation:
             UseLocationView(
