@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct UseLocationView: View {
-    @EnvironmentObject var locationService: LocationService
-    
     @StateObject var coordinator: UseLocationCoordinator
     
     var body: some View {
@@ -25,7 +23,7 @@ struct UseLocationView: View {
             statusView
             
             Button {
-                locationService.requestAuthorization()
+                coordinator.requestLocationAuthorization()
             } label: {
                 Text("Check again")
             }
@@ -44,7 +42,7 @@ struct UseLocationView: View {
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.nubiBlack)
         .task {
-            locationService.verifyServices()
+            await coordinator.verifyServices()
         }
     }
 }
@@ -53,8 +51,8 @@ fileprivate extension UseLocationView {
     @ViewBuilder
     var statusView: some View{
         VStack {
-            permissionEntry("Location service", isOn: locationService.isLocationServiceEnabled, negativeText: "Disabled")
-            permissionEntry("Location permission", isOn: locationService.isLocationPermissionGranted)
+            permissionEntry("Location service", isOn: coordinator.isLocationServiceEnabled, negativeText: "Disabled")
+            permissionEntry("Location permission", isOn: coordinator.isLocationPermissionGranted)
         }
     }
     

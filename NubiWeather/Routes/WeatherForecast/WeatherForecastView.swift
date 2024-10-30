@@ -7,19 +7,15 @@
 
 import SwiftUI
 
-struct WeatherForecastView: View {
-    
+struct WeatherForecastView: View {    
     @StateObject var coordinator: WeatherForecastCoordinator
-    
-    let location: Location
     
     var body: some View {
         VStack(spacing: 16) {
             Text("Weather forecast")
                 .titleStyle()
             
-            Text("lat: \(location.latitude), long: \(location.longitude)")
-                .bodyStyle()
+            topLocationView
             
             Button {
 //                /// Weather comes from list index
@@ -35,7 +31,25 @@ struct WeatherForecastView: View {
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.nubiBlack)
         .onAppear {
-            coordinator.fetchWeather(location: location)
+//            coordinator.fetchWeather(location: location)
         }
+    }
+}
+
+fileprivate extension WeatherForecastView {
+    @ViewBuilder
+    var topLocationView: some View {
+        HStack {
+            Text("Location")
+            
+            Spacer()
+            
+            if let currentCity = coordinator.currentCityName {
+                Text(currentCity)
+            } else {
+                Text("Unknown")
+            }
+        }
+        .bodyStyle()
     }
 }

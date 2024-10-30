@@ -42,17 +42,28 @@ private extension NubiWeatherApp {
             EnterLocationView(coordinator: EnterLocationCoordinator(navigation: self))
                 .navigationTitle("Enter Location")
         case .useMyLocation:
-            UseLocationView(coordinator: UseLocationCoordinator(navigation: self))
+            UseLocationView(
+                coordinator: UseLocationCoordinator(
+                    navigation: self,
+                    locationService: locationService
+                )
+            )
                 .navigationTitle("Use my location")
-                .environmentObject(locationService)
         case let .weatherForecast(location):
             WeatherForecastView(
-                coordinator: WeatherForecastCoordinator(navigation: self),
-                location: location
+                coordinator: WeatherForecastCoordinator(
+                    navigation: self,
+                    locationService: locationService,
+                    location: location
+                )
             )
         case let .weatherDetails(weather):
             WeatherDetailsView(
-                coordinator: WeatherForecastCoordinator(navigation: self),
+                coordinator: WeatherForecastCoordinator(
+                    navigation: self,
+                    locationService: locationService,
+                    location: nil
+                ),
                 weather: weather
             )
         }

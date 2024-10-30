@@ -8,15 +8,33 @@
 import Foundation
 
 final class UseLocationCoordinator: ObservableObject {
-    
+    private let locationService: LocationService
     private let navigation: Navigation
     
-    init(navigation: Navigation) {
+    var isLocationServiceEnabled: Bool {
+        locationService.isLocationServiceEnabled
+    }
+    
+    var isLocationPermissionGranted: Bool {
+        locationService.isLocationPermissionGranted
+    }
+    
+    init(navigation: Navigation, locationService: LocationService) {
         self.navigation = navigation
+        self.locationService = locationService
     }
     
     func confirmLocation() {
-        let location = Location(latitude: 52.409538, longitude: 16.931992)
+        guard let currentCoreLocation = locationService.fetchLocation() else { return }
+        let location = Location(latitude: currentCoreLocation.latitude, longitude: currentCoreLocation.longitude)
         navigation.push(.weatherForecast(location))
+    }
+    
+    func requestLocationAuthorization() {
+        locationService.requestAuthorization()
+    }
+    
+    func verifyServices() async  {
+        await locationService.verifyServices()
     }
 }

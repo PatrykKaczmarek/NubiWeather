@@ -13,6 +13,7 @@ final class LocationService: NSObject, ObservableObject {
     
     @Published var isLocationPermissionGranted: Bool = false
     @Published var isLocationServiceEnabled: Bool = false
+    @Published var lastKnownLocation: CLLocationCoordinate2D?
     
     override init() {
         super.init()
@@ -22,11 +23,41 @@ final class LocationService: NSObject, ObservableObject {
     @MainActor func verifyServices() {
         verifyPermission()
         verifyLocationService()
-
+    }
+    
+    
+    /// To simplify we return only city name
+    func geoDeocode(_ coordinates: Location?) async throws -> String?  {
+        guard let coordinates else { return nil }
+        let geocoder = CLGeocoder()
+        
+        guard let placemark = try await geocoder.reverseGeocodeLocation(
+            CLLocation(
+                latitude: coordinates.latitude,
+                longitude: coordinates.longitude
+            )
+        ).first else {
+            return nil
+        }
+        
+        return placemark.locality
+    }
+    
+    /// Return location from city name
+    func getLocation(from cityName: String) async throws -> Location? {
+        let geocoder = CLGeocoder()
+        guard let placemark = try await geocoder.geocodeAddressString(cityName).first else { return nil }
+        guard let coordinates = placemark.location?.coordinate else { return nil }
+        return Location(latitude: coordinates.latitude, longitude: coordinates.longitude)
     }
     
     func requestAuthorization() {
         manager.requestWhenInUseAuthorization()
+    }
+    
+    func fetchLocation() -> CLLocationCoordinate2D? {
+        manager.requestLocation()
+        return manager.location?.coordinate
     }
     
     private func verifyLocationService() {
@@ -58,5 +89,9 @@ extension LocationService: @preconcurrency CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
         print("LOCATION ERROR: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        lastKnownLocation = locations.first?.coordinate
     }
 }
