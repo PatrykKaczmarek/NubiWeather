@@ -48,3 +48,7 @@ InPost Recruitment Task/.build/
 InPost Recruitment Task/Pods/
 
 .DS_Store
+
+
+# Project specific
+**/AppConfig.plist

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeatherDetailsView: View {
     
-    @StateObject var coordinator: WeatherForecastCoordinator
+    @StateObject var coordinator: WeatherDetailsCoordinator
     
     let weather: Weather
     

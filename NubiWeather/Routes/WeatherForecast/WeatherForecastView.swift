@@ -30,16 +30,6 @@ struct WeatherForecastView: View {
             }
             .listStyle(.inset)
             .scrollContentBackground(.hidden)
-            
-            Button {
-//                /// Weather comes from list index
-//                coordinator.showForecastDetails(weather: <#T##Weather#>)
-            } label: {
-                Text("Today")
-            }
-            .buttonStyle(OutlineButtonStyle())
-
-            Spacer()
         }
         .padding(EdgeInsets(top: 64, leading: 16, bottom: 16, trailing: 16))
         .containerRelativeFrame([.horizontal, .vertical])

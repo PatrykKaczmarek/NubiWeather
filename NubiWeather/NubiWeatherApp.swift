@@ -9,7 +9,8 @@ import SwiftUI
 
 @main
 struct NubiWeatherApp: App {
-    private let locationService = LocationService()
+    
+    private let services = AppServices()
     
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(resource: .nubiWhite)]
@@ -45,24 +46,28 @@ private extension NubiWeatherApp {
             UseLocationView(
                 coordinator: UseLocationCoordinator(
                     navigation: self,
-                    locationService: locationService
+                    locationService:services.locationService
                 )
             )
                 .navigationTitle("Use my location")
         case let .weatherForecast(location):
-            WeatherForecastView(
-                coordinator: WeatherForecastCoordinator(
-                    navigation: self,
-                    locationService: locationService,
-                    location: location
+            if let weatherService = services.weatherService {
+                WeatherForecastView(
+                    coordinator: WeatherForecastCoordinator(
+                        navigation: self,
+                        locationService: services.locationService,
+                        weatherService: weatherService,
+                        location: location
+                    )
                 )
-            )
+            } else {
+                /// Here it should be handled more gracefully.
+                EmptyView()
+            }
         case let .weatherDetails(weather):
             WeatherDetailsView(
-                coordinator: WeatherForecastCoordinator(
-                    navigation: self,
-                    locationService: locationService,
-                    location: nil
+                coordinator: WeatherDetailsCoordinator(
+                    navigation: self
                 ),
                 weather: weather
             )

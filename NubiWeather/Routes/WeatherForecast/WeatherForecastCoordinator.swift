@@ -13,25 +13,23 @@ final class WeatherForecastCoordinator: ObservableObject {
     @Published var currentCityName: String?
     @Published var weather: [Weather] = []
     
-    //private let service = WeatherService()
     private var lastKnownLocationListener: AnyCancellable?
     
     private let navigation: Navigation
+    private let weatherService: WeatherService
     private let locationService: LocationService
-    private let location: Location?
+    private let location: Location
     
     init(
         navigation: Navigation,
         locationService: LocationService,
-        location: Location?
+        weatherService: WeatherService,
+        location: Location
     ) {
         self.navigation = navigation
         self.locationService = locationService
+        self.weatherService = weatherService
         self.location = location
-        
-        Task { @MainActor in
-            currentCityName = try await locationService.geoDeocode(location)
-        }
     }
     
     func showForecastDetails(weather: Weather) {
@@ -39,6 +37,12 @@ final class WeatherForecastCoordinator: ObservableObject {
     }
     
     func fetchWeather() {
-        //service.fetchWeather(location: location)
+        Task { @MainActor in
+            do {
+                weather = try await weatherService.fetchWeather(location: location)
+            } catch {
+                // Handle error
+            }
+        }
     }
 }

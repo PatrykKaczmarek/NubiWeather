@@ -42,6 +42,7 @@ fileprivate extension Weather {
             date: .distantPast,
             temperatureMax: 0,
             temperatureMin: 0,
+            condition: "Cloudy all day",
             humidityAvg: 0,
             precipitationProbabilityAvg: 0,
             uvIndexAvg: 0,
