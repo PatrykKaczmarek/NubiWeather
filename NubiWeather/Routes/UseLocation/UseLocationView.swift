@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UseLocationView: View {
+    @EnvironmentObject var locationService: LocationService
     @StateObject var coordinator: UseLocationCoordinator
     
     var body: some View {
@@ -51,8 +52,8 @@ fileprivate extension UseLocationView {
     @ViewBuilder
     var statusView: some View{
         VStack {
-            permissionEntry("Location service", isOn: coordinator.isLocationServiceEnabled, negativeText: "Disabled")
-            permissionEntry("Location permission", isOn: coordinator.isLocationPermissionGranted)
+            permissionEntry("Location service", isOn: locationService.isLocationServiceEnabled, negativeText: "Disabled")
+            permissionEntry("Location permission", isOn: locationService.isLocationPermissionGranted)
         }
     }
     

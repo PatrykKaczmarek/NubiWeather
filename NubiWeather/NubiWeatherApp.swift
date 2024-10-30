@@ -54,7 +54,8 @@ private extension NubiWeatherApp {
                     locationService:services.locationService
                 )
             )
-                .navigationTitle("Use my location")
+            .navigationTitle("Use my location")
+            .environmentObject(services.locationService)
         case let .weatherForecast(location):
             if let weatherService = services.weatherService {
                 WeatherForecastView(

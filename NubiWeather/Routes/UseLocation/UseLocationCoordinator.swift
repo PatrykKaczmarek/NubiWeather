@@ -8,16 +8,8 @@
 import Foundation
 
 final class UseLocationCoordinator: ObservableObject {
-    private let locationService: LocationService
+    private(set) var locationService: LocationService
     private let navigation: Navigation
-    
-    var isLocationServiceEnabled: Bool {
-        locationService.isLocationServiceEnabled
-    }
-    
-    var isLocationPermissionGranted: Bool {
-        locationService.isLocationPermissionGranted
-    }
     
     init(navigation: Navigation, locationService: LocationService) {
         self.navigation = navigation
