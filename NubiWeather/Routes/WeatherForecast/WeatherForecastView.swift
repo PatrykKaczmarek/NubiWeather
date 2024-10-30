@@ -17,17 +17,25 @@ struct WeatherForecastView: View {
             
             topLocationView
             
-            List(coordinator.weather) { weather in
-                WeatherForecastRow(weather: weather)
-                    .onTapGesture {
-                        coordinator.showForecastDetails(weather: weather)
-                    }
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
-                    .listRowBackground(Color.clear)
+            switch coordinator.uiState {
+            case .unknown:
+                Spacer()
+            case .loading:
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(.nubiWhite)
+                Spacer()
+            case .empty:
+                Text("No data.")
+                    .bodyStyle()
+                Spacer()
+            case .error:
+                Text("Please try again later.")
+                    .bodyStyle()
+                Spacer()
+            case .data(let weather):
+                listView(weather: weather)
             }
-            .listStyle(.inset)
-            .scrollContentBackground(.hidden)
         }
         .padding(EdgeInsets(top: 64, leading: 16, bottom: 16, trailing: 16))
         .containerRelativeFrame([.horizontal, .vertical])
@@ -38,7 +46,7 @@ struct WeatherForecastView: View {
     }
 }
 
-fileprivate extension WeatherForecastView {
+private extension WeatherForecastView {
     @ViewBuilder
     var topLocationView: some View {
         HStack {
@@ -61,5 +69,20 @@ fileprivate extension WeatherForecastView {
             )
         }
         .bodyStyle()
+    }
+    
+    @ViewBuilder
+    func listView(weather: [Weather]) -> some View {
+        List(weather) { weather in
+            WeatherForecastRow(weather: weather)
+                .onTapGesture {
+                    coordinator.showForecastDetails(weather: weather)
+                }
+                .listRowSeparator(.hidden)
+                .listRowInsets(.init(top: 8, leading: 0, bottom: 8, trailing: 0))
+                .listRowBackground(Color.clear)
+        }
+        .listStyle(.inset)
+        .scrollContentBackground(.hidden)
     }
 }

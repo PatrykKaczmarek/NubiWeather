@@ -66,7 +66,6 @@ final class LocationService: NSObject, ObservableObject {
             
             Task { @MainActor in
                 self?.isLocationServiceEnabled = status
-                
             }
         }
     }

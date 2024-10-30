@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class WeatherForecastCoordinator: ObservableObject {    
+final class WeatherForecastCoordinator: ObservableObject {
     @Published var currentCityName: String?
-    @Published var weather: [Weather] = []
+    @Published var uiState: UIState<[Weather]> = .unknown
     
     private let navigation: Navigation
     private let weatherService: WeatherService
@@ -37,11 +37,17 @@ final class WeatherForecastCoordinator: ObservableObject {
     }
     
     func fetchWeather() {
+        uiState = .loading
         Task { @MainActor in
             do {
-                weather = try await weatherService.fetchWeather(location: location)
+                let weather = try await weatherService.fetchWeather(location: location)
+                if weather.isEmpty {
+                    uiState = .empty
+                } else {
+                    uiState = .data(weather)
+                }
             } catch {
-                // Handle error
+                uiState = .error
             }
         }
     }
