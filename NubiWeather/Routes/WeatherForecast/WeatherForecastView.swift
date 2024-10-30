@@ -63,6 +63,7 @@ private extension WeatherForecastView {
                             coordinator.changeLocation()
                         } label: {
                             Text(currentCity)
+                                .foregroundStyle(.nubiPink)
                         }
                     }
                     

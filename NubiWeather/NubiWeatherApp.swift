@@ -89,10 +89,12 @@ extension NubiWeatherApp: Navigation {
         path.removeLast(1)
     }
     
-    func route(to element: NavigationDestination) {
+    @discardableResult
+    func route(to element: NavigationDestination) -> Bool {
         guard let index = path.lastIndex(of: element) else {
-            return
+            return false
         }
         path.removeLast(index + 1)
+        return true
     }
 }
